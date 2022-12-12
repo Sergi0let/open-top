@@ -2,15 +2,16 @@ import { Button, Htag } from '../components';
 import P from '../components/P/P';
 import Tag from '../components/Tag/Tag';
 import { useEffect, useState } from 'react';
+import Rating from '../components/Rating/Rating';
 
 export default function Home(): JSX.Element {
   const [counter, setCounter] = useState<number>(0);
+  const [rating, setRating] = useState<number>(2);
+  const [rating2, setRating2] = useState<number>(1);
+  const [rating3, setRating3] = useState<number>(3);
 
   useEffect(() => {
     console.log('Counter ' + counter);
-    return function cleanUp() {
-      console.log('Unmount');
-    };
   });
 
   return (
@@ -55,6 +56,9 @@ export default function Home(): JSX.Element {
       <Tag color="green" href="http//:youtube.com">
         link
       </Tag>
+      <Rating rating={rating} setRating={setRating} isEditable />
+      <Rating rating={rating2} setRating={setRating2} isEditable />
+      <Rating rating={5} />
     </div>
   );
 }

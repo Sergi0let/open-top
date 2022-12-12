@@ -1,6 +1,10 @@
-import { ReactNode } from 'react';
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
 
-export interface PProps {
-  size?: 'small' | 'big';
+export interface PProps
+  extends DetailedHTMLProps<
+    HTMLAttributes<HTMLParagraphElement>,
+    HTMLParagraphElement
+  > {
+  size?: 's' | 'm' | 'l';
   children: ReactNode;
 }

@@ -1,12 +1,18 @@
 .p {
-  font-size: 16px;
   margin: 0;
 }
 
-.small {
+.s {
   font-size: 14px;
+  line-height: 24px;
 }
 
-.big {
+.m {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.l {
   font-size: 18px;
+  line-height: 29px;
 }

@@ -1,4 +1,5 @@
 import { Button, Htag } from '../components';
+import P from '../components/P/P';
 
 export default function Home(): JSX.Element {
   return (
@@ -15,6 +16,14 @@ export default function Home(): JSX.Element {
       <Button appearance="primary" arrow="down">
         Arrow
       </Button>
+      <P size="small">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis eos
+        ?
+      </P>
+      <P>Lorem ipsum dolor sit.</P>
+      <P size="big">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur!
+      </P>
     </div>
   );
 }

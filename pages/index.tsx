@@ -3,12 +3,12 @@ import P from '../components/P/P';
 import Tag from '../components/Tag/Tag';
 import { useEffect, useState } from 'react';
 import Rating from '../components/Rating/Rating';
+import { withLayout } from '../Layout/Layout';
 
-export default function Home(): JSX.Element {
+function Home(): JSX.Element {
   const [counter, setCounter] = useState<number>(0);
   const [rating, setRating] = useState<number>(2);
   const [rating2, setRating2] = useState<number>(1);
-  const [rating3, setRating3] = useState<number>(3);
 
   useEffect(() => {
     console.log('Counter ' + counter);
@@ -62,3 +62,5 @@ export default function Home(): JSX.Element {
     </div>
   );
 }
+
+export default withLayout(Home);

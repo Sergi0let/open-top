@@ -1,20 +1,38 @@
 import { Button, Htag } from '../components';
 import P from '../components/P/P';
 import Tag from '../components/Tag/Tag';
+import { useEffect, useState } from 'react';
 
 export default function Home(): JSX.Element {
+  const [counter, setCounter] = useState<number>(0);
+
+  useEffect(() => {
+    console.log('Counter ' + counter);
+    return function cleanUp() {
+      console.log('Unmount');
+    };
+  });
+
   return (
     <div>
-      <Htag tag="h1">Hello</Htag>
+      <Htag tag="h1">{counter ? counter : null}</Htag>
       <Htag tag="h2">Hello</Htag>
       <Htag tag="h3">Hello</Htag>
-      <Button appearance="primary" arrow="right">
+      <Button
+        onClick={() => setCounter((x) => x + 1)}
+        appearance="primary"
+        arrow="right"
+      >
         Button
       </Button>
-      <Button appearance="ghoust" arrow="right">
+      <Button
+        onClick={() => setCounter((x) => x - 1)}
+        appearance="ghoust"
+        arrow="right"
+      >
         Button 2
       </Button>
-      <Button appearance="primary" arrow="down">
+      <Button onClick={() => setCounter(0)} appearance="primary" arrow="down">
         Arrow
       </Button>
       <P size="s">

@@ -1,66 +1,44 @@
-import { Button, Htag } from '../components';
-import P from '../components/P/P';
-import Tag from '../components/Tag/Tag';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Rating from '../components/Rating/Rating';
 import { withLayout } from '../Layout/Layout';
+import { GetStaticProps } from 'next';
+import axios from 'axios';
+import { MenuItem } from '../interfaces/menu.interfaces';
 
-function Home(): JSX.Element {
-  const [counter, setCounter] = useState<number>(0);
+function Home({ menu }: HomeProps): JSX.Element {
   const [rating, setRating] = useState<number>(2);
   const [rating2, setRating2] = useState<number>(1);
 
-  useEffect(() => {
-    console.log('Counter ' + counter);
-  });
-
   return (
     <div>
-      <Htag tag="h1">{counter ? counter : null}</Htag>
-      <Htag tag="h2">Hello</Htag>
-      <Htag tag="h3">Hello</Htag>
-      <Button
-        onClick={() => setCounter((x) => x + 1)}
-        appearance="primary"
-        arrow="right"
-      >
-        Button
-      </Button>
-      <Button
-        onClick={() => setCounter((x) => x - 1)}
-        appearance="ghoust"
-        arrow="right"
-      >
-        Button 2
-      </Button>
-      <Button onClick={() => setCounter(0)} appearance="primary" arrow="down">
-        Arrow
-      </Button>
-      <P size="s">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis eos
-        ?
-      </P>
-      <P>Lorem ipsum dolor sit.</P>
-      <P size="l">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur!
-      </P>
-      <Tag size="s" color="ghoust">
-        but1
-      </Tag>
-      <Tag size="m" color="red">
-        but2
-      </Tag>
-      <Tag color="green">but3</Tag>
-      <Tag color="grey">but4</Tag>
-      <Tag color="primary">but5</Tag>
-      <Tag color="green" href="http//:youtube.com">
-        link
-      </Tag>
       <Rating rating={rating} setRating={setRating} isEditable />
       <Rating rating={rating2} setRating={setRating2} isEditable />
       <Rating rating={5} />
+      <ul>
+        {menu.map((m) => (
+          <li key={m._id.secondCategory}>{m._id.secondCategory}</li>
+        ))}
+      </ul>
     </div>
   );
 }
 
 export default withLayout(Home);
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const firstCategory = 0;
+  const { data: menu } = await axios.get<MenuItem[]>(
+    process.env.NEXT_PUBLIC_DOMAIN + '/api/sidebar-data'
+  );
+  return {
+    props: {
+      menu,
+      firstCategory,
+    },
+  };
+};
+
+interface HomeProps extends Record<string, unknown> {
+  menu: MenuItem[];
+  firstCategory: number;
+}
